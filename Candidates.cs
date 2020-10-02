@@ -16,6 +16,7 @@ namespace Election
             Name = name;
             Cpf = cpf;
             Votes = 0;
+
         }
     }
 }

@@ -7,13 +7,16 @@ namespace Election
     class Election
     {
 
-        public List <Candidates> Candidates {get ; set;}
-        public bool CreateCandidates(List<Candidates> candidates, string password)
+        private List<Candidates> candidates {get ; set;}
+
+        public IReadOnlyCollection<Candidates> Candidates => candidates;
+
+        public bool CreateCandidates(List<Candidates> candidate, string password)
         {
 
             if(password == "Pa$$w0rd")
             {
-                Candidates = candidates;
+                candidates = candidate;
 
                 return true;
             }
@@ -22,29 +25,29 @@ namespace Election
 
         public Guid GetCandidateIdByCpf(string cpf)
         {
-            return Candidates.First(x => x.Cpf == cpf).Id;
+            return candidates.First(x => x.Cpf == cpf).Id;
         }
         
         
         public void Vote(Guid id)
         {
-            Candidates.First(candidates => candidates.Id == id).Votes++; 
+            candidates.First(candidate => candidate.Id == id).Votes++; 
         }
 
         public List<Candidates> GetWinners()
         {
-            var winners = new List<Candidates>{Candidates[0]};
+            var winners = new List<Candidates>{candidates[0]};
 
             for (int i = 1; i < Candidates.Count; i++)
             {
-                if (Candidates[i].Votes > winners[0].Votes)
+                if (candidates[i].Votes > winners[0].Votes)
                 {
                     winners.Clear();
-                    winners.Add(Candidates[i]);
+                    winners.Add(Candidates.ElementAt(i));
                 }
-                else if (Candidates[i].Votes == winners[0].Votes)
+                else if (candidates[i].Votes == winners[0].Votes)
                 {
-                    winners.Add(Candidates[i]);
+                    winners.Add(Candidates.ElementAt(i));
                 }
             }
                 return winners;
@@ -52,7 +55,7 @@ namespace Election
 
         public List<Candidates> GetCandidatesByName(string name)
         {
-            return Candidates.Where(item => item.Name == name).ToList();
+            return candidates.Where(item => item.Name == name).ToList();
         }
     }
 }

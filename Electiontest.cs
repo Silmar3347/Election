@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace Election
@@ -38,8 +39,8 @@ namespace Election
 
             Assert.True(created);
 
-            Assert.True(Election.Candidates.Count == 2);
-            Assert.True(CandidateJose.Name != CandidateAna.Name);
+            Assert.Equal(2, Election.Candidates.Count);
+            Assert.NotEqual(CandidateJose.Name, CandidateAna.Name);
         }
 
         [Fact]
@@ -82,8 +83,8 @@ namespace Election
             Election.Vote(joseId);
 
             // Deve / Asserções
-            var candidateJose = Election.Candidates.Find(x => x.Id == joseId);
-            var candidateAna = Election.Candidates.Find(x => x.Id == anaId);
+            var candidateJose = Election.Candidates.First(x => x.Id == joseId);
+            var candidateAna = Election.Candidates.First(x => x.Id == anaId);
             Assert.True(candidateAna.Votes == 0);
             Assert.True(candidateJose.Votes == 2);
 
