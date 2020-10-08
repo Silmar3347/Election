@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Election
+namespace Domain
 {
     public class Candidates
     {

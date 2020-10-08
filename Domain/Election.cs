@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Election
+namespace Domain
 {
-    class Election
+    public class Election
     {
 
         private List<Candidates> candidates {get ; set;}
