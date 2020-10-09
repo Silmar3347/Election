@@ -12,8 +12,8 @@ namespace Test
         public void should_not_create_candidates_when_password_is_incorrect()
         {
             var election = new Election();
-            var candidateAna = new Candidates("Ana","15458525658");
-            var candidateJose = new Candidates("Jose","14584584847");
+            var candidateAna = new Candidates("Ana","154.585.256-58");
+            var candidateJose = new Candidates("Jose","145.845.848-47");
 
             var candidates = new List<Candidates>()  {candidateAna, candidateJose};
 
@@ -27,20 +27,20 @@ namespace Test
         public void should_create_candidates_when_password_is_correct()
         {
             //Given
-            var Election = new Election();
-            var candidateAna = new Candidates("Ana","15458525658");
-            var candidateJose = new Candidates("Jose","14584584847");
+            var election = new Election();
+            var candidateAna = new Candidates("Ana","154.585.256-58");
+            var candidateJose = new Candidates("Jose","145.845.848-47");
 
             var candidates = new List<Candidates>()  {candidateAna, candidateJose};
 
             //When
-            var created = Election.CreateCandidates(candidates, "Pa$$w0rd");
+            var created = election.CreateCandidates(candidates, "Pa$$w0rd");
 
             //Then
 
             Assert.True(created);
 
-            Assert.Equal(2, Election.Candidates.Count);
+            Assert.Equal(2, election.Candidates.Count);
             Assert.NotEqual(candidateJose.Name, candidateAna.Name);
         }
 
@@ -48,16 +48,16 @@ namespace Test
         public void should_return_same_candidates()
         {
         //Given
-            var Election = new Election();
-            var candidateAna = new Candidates("Ana","15458525658");
-            var candidateJose = new Candidates("Jose","14584584847");
+            var election = new Election();
+            var candidateAna = new Candidates("Ana","154.585.256-58");
+            var candidateJose = new Candidates("Jose","145.845.848-47");
 
             var candidates = new List<Candidates>()  {candidateAna, candidateJose};
-            Election.CreateCandidates(candidates, "Pa$$w0rd");
+            election.CreateCandidates(candidates, "Pa$$w0rd");
             
             //When
-            var candidateJosee = Election.GetCandidateIdByCpf(candidateJose.Cpf);
-            var candidateAnaa = Election.GetCandidateIdByCpf(candidateAna.Cpf);
+            var candidateJosee = election.GetCandidateIdByCpf(candidateJose.Cpf);
+            var candidateAnaa = election.GetCandidateIdByCpf(candidateAna.Cpf);
 
             Assert.NotEqual(candidateAna, candidateJose);
         }
@@ -67,25 +67,25 @@ namespace Test
         {
             // Dado / Setup
             // OBJETO Election
-            var Election = new Election();
-            var candidateAna = new Candidates("Ana","15458525658");
-            var candidateJose = new Candidates("Jose","14584584847");
+            var election = new Election();
+            var candidateAna = new Candidates("Ana","154.585.256-58");
+            var candidateJose = new Candidates("Jose","145.845.848-47");
 
              var candidates = new List<Candidates>()  {candidateAna, candidateJose};
 
-            Election.CreateCandidates(candidates, "Pa$$w0rd");
+            election.CreateCandidates(candidates, "Pa$$w0rd");
 
-            var joseId = Election.GetCandidateIdByCpf(candidateAna.Cpf);
-            var anaId = Election.GetCandidateIdByCpf(candidateJose.Cpf);
+            var joseId = election.GetCandidateIdByCpf(candidateAna.Cpf);
+            var anaId = election.GetCandidateIdByCpf(candidateJose.Cpf);
 
             // Quando / Ação
             // Estamos acessando o MÉTODO ShowMenu do OBJETO Election
-            Election.Vote(joseId);
-            Election.Vote(joseId);
+            election.Vote(joseId);
+            election.Vote(joseId);
 
             // Deve / Asserções
-            var candidateJosee = Election.Candidates.First(x => x.Id == joseId);
-            var candidateAnaa = Election.Candidates.First(x => x.Id == anaId);
+            var candidateJosee = election.Candidates.First(x => x.Id == joseId);
+            var candidateAnaa = election.Candidates.First(x => x.Id == anaId);
             Assert.True(candidateAnaa.Votes == 0);
             Assert.True(candidateJosee.Votes == 2);
 
@@ -97,20 +97,20 @@ namespace Test
         {
             // Dado / Setup
             // OBJETO Election
-            var Election = new Election();
-            var candidateAna = new Candidates("Ana","15458525658");
-            var candidateJose = new Candidates("Jose","14584584847");
+            var election = new Election();
+            var candidateAna = new Candidates("Ana","154.585.256-58");
+            var candidateJose = new Candidates("Jose","145.845.848-47");
 
             var candidates = new List<Candidates>()  {candidateAna, candidateJose};
 
-            Election.CreateCandidates(candidates, "Pa$$w0rd");
-            var anaId = Election.GetCandidateIdByCpf(candidateAna.Cpf);
+            election.CreateCandidates(candidates, "Pa$$w0rd");
+            var anaId = election.GetCandidateIdByCpf(candidateAna.Cpf);
             
             // Quando / Ação
             // Estamos acessando o MÉTODO ShowMenu do OBJETO Election
-            Election.Vote(anaId);
-            Election.Vote(anaId);
-            var winners = Election.GetWinners();
+            election.Vote(anaId);
+            election.Vote(anaId);
+            var winners = election.GetWinners();
 
             // Deve / Asserções
             Assert.True(winners.Count == 1);
@@ -123,20 +123,20 @@ namespace Test
         {
             // Dado / Setup
             // OBJETO Election
-            var Election = new Election();
-            var candidateAna = new Candidates("Ana","15458525658");
-            var candidateJose = new Candidates("Jose","14584584847");
+            var election = new Election();
+            var candidateAna = new Candidates("Ana","154.585.256-58");
+            var candidateJose = new Candidates("Jose","145.845.848-47");
 
             var candidates = new List<Candidates>()  {candidateAna, candidateJose};
 
-            Election.CreateCandidates(candidates, "Pa$$w0rd");
-            var joseId = Election.GetCandidateIdByCpf(candidateJose.Cpf);
-            var anaId = Election.GetCandidateIdByCpf(candidateAna.Cpf);
+            election.CreateCandidates(candidates, "Pa$$w0rd");
+            var joseId = election.GetCandidateIdByCpf(candidateJose.Cpf);
+            var anaId = election.GetCandidateIdByCpf(candidateAna.Cpf);
             
             // Quando / Ação
-            Election.Vote(anaId);
-            Election.Vote(joseId);
-            var winners = Election.GetWinners();
+            election.Vote(anaId);
+            election.Vote(joseId);
+            var winners = election.GetWinners();
 
             // Deve / Asserções
             var candidateJosee = winners.Find(x => x.Cpf == candidateJose.Cpf);
@@ -149,17 +149,17 @@ namespace Test
         public void Should_Return_Repeated_Names()
         {
             //Given
-            var Election = new Election();
-            var candidateAna = new Candidates("Ana","15458525658");
-            var candidateJose = new Candidates("Jose","14584584847");
+            var election = new Election();
+            var candidateAna = new Candidates("Ana","154.585.256-58");
+            var candidateJose = new Candidates("Jose","145.845.848-47");
 
             var candidates = new List<Candidates>() {candidateAna, candidateJose};
 
-            Election.CreateCandidates(candidates, "Pa$$w0rd");
+            election.CreateCandidates(candidates, "Pa$$w0rd");
 
             //When
             var input = "Jose";
-            var result = Election.GetCandidatesByName(input);
+            var result = election.GetCandidatesByName(input);
 
             //Then
 
