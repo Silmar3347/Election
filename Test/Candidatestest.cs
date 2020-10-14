@@ -56,8 +56,14 @@ namespace Tests
         [InlineData("000.000.000-00")]
         [InlineData("000.000.000-01")]
         [InlineData("100.000.000-00")]
-        [InlineData("999.999.999-99")]
+        [InlineData("555.444.333-22")]
+        [InlineData("123.456.789-10")]
+        [InlineData("000,368,560-00")]
+        [InlineData("109.876.543-21")]
         [InlineData("000.368.560-00")]
+        [InlineData("02.368-560.00")]
+        [InlineData("999.999.999-99")]
+        [InlineData("542.365.568-06")]
         [InlineData("640.3685606")]
         [InlineData("640.368.560-6")]
         [InlineData("640.368.560-6a")]
@@ -88,5 +94,36 @@ namespace Tests
             // Deve / Asserções
             Assert.True(isValid);
         }
+
+
+
+        [Theory]
+        [InlineData("joao marcelo-")]
+        [InlineData("Carlos.")]
+        public void Should_return_false_when_name_is_incorrect(string Name)
+        {
+            var Jose = new Candidates(Name, "640.368.560-06");
+
+            var isValid = Jose.Validate();
+
+            Assert.False(isValid);
+        }
+
+        [Theory]
+        [InlineData("Joao Carlos")]
+        [InlineData("Seu Zé")]
+        public void Should_return_true_when_NAME_is_valid(string Name)
+        {
+            // Dado / Setup
+            var Jose = new Candidates(Name, "640.368.560-06");
+
+            // When / Ação
+            var isValid = Jose.Validate();
+            
+            // Deve / Asserções
+            Assert.True(isValid);
+        }
+
+        
     }
 }

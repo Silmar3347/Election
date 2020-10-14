@@ -26,6 +26,22 @@ namespace Domain
 
        public bool Validate()
         {
+            if (string.IsNullOrEmpty(Name))
+            {
+                return false;
+            }
+            
+            var name = Name.Split(' ');
+
+
+            foreach (var item in name)
+            {
+                if(!item.All(char.IsLetter))
+                {
+                    return false;
+                }
+            }
+
             if (string.IsNullOrEmpty(Cpf))
             {
                 return false;
